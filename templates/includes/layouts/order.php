@@ -1,0 +1,1 @@
+<?=html_render('order/text',$abc['page'])?>

@@ -1,0 +1,6 @@
+.idea/
+_imgs/
+node_modules/
+smartoptimizer/cache/
+logs/
+uploads/

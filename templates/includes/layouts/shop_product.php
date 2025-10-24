@@ -1,0 +1,1 @@
+<?=html_render('shop/product_text', $abc['page']);

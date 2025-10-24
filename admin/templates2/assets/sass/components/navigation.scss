@@ -1,0 +1,167 @@
+.navigation {
+	padding-bottom: 15px;
+	background: white;
+	z-index: 999;
+	width: $navigation-width;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+
+	&.sticky {
+		height: 100vh;
+	}
+
+	#logo {
+		flex: none;
+
+		img:not(.logo) {
+			display: none;
+		}
+	}
+
+	header.navigation-header {
+		padding: 20px;
+		padding-top: 0;
+		text-align: center;
+
+		figure {
+			margin-bottom: 1rem;
+		}
+
+		.nav {
+			justify-content: center;
+
+			.nav-item {
+				margin: 0 5px;
+
+				.nav-link {
+					svg {
+						width: 15px;
+						height: 15px;
+					}
+				}
+			}
+		}
+	}
+
+	& .navigation-menu-body {
+		/// height: 100%;
+		display: flex;
+		flex-direction: column;
+		padding: 0;
+		flex: 1;
+
+		& > ul {
+			li {
+
+				&.navigation-divider {
+					padding: 10px 20px;
+					text-transform: uppercase;
+					font-size: 11px;
+					color: rgba(black, .5);
+					letter-spacing: .5px;
+					margin-top: 10px;
+
+					&:first-child {
+						margin-top: 0;
+						padding-top: 0;
+					}
+				}
+
+				a {
+					display: flex;
+					align-items: center;
+					padding: 10px 35px;
+					color: black + 80;
+					transition: background .3s;
+
+					.nav-link-icon {
+						margin-right: .8rem;
+						stroke: rgba(black, .3);
+						transition: stroke .3s;
+						width: 18px;
+						height: 18px;
+					}
+
+					&:hover {
+						background: white - 5;
+						color: black;
+
+						.nav-link-icon {
+							stroke: rgba(black, .5);
+						}
+					}
+
+					&.active {
+						position: relative;
+						color: $color-primary;
+
+						&:before {
+							content: '';
+							position: absolute;
+							display: block;
+							top: 0;
+							bottom: 0;
+							left: 0;
+							width: 7px;
+							border-top-right-radius: 5px;
+							border-bottom-right-radius: 5px;
+							background-color: $color-primary;
+						}
+					}
+
+					.sub-menu-arrow {
+						margin-left: auto;
+						font-size: .550rem;
+						transition: transform .5s;
+
+						&.rotate-in {
+							transform: rotate(540deg);
+						}
+					}
+
+					.badge {
+						margin-left: auto;
+						text-indent: -9999px;
+						width: 6px;
+						height: 6px;
+						border-radius: 50%;
+						padding: 0;
+					}
+
+					& + ul {
+						display: none;
+
+						li {
+							margin: 0;
+
+							a {
+								padding-left: 66px;
+							}
+						}
+
+						ul {
+							border-left: none;
+
+							li {
+								a {
+									padding-left: 80px;
+								}
+							}
+						}
+					}
+				}
+
+				&.open {
+					& > ul {
+						display: block;
+					}
+				}
+
+				&.open > a {
+					background-color: inherit;
+				}
+			}
+		}
+	}
+}

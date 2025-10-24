@@ -1,0 +1,1 @@
+<?=html_render('gallery/list',$abc['galleries'])?>

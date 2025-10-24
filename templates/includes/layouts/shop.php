@@ -1,0 +1,1 @@
+<?=html_render('shop/category_list', $abc['category_list']);

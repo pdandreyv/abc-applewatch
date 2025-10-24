@@ -1,0 +1,19 @@
+.preloader {
+	position: fixed;
+	right: 0;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	z-index: 1001;
+	background: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+
+	svg {
+		path {
+			fill: $color-primary;
+		}
+	}
+}

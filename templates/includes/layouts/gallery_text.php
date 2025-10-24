@@ -1,0 +1,1 @@
+<?=html_array('gallery/text',$abc['page'])?>

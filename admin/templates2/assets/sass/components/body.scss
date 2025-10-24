@@ -1,0 +1,11 @@
+body {
+	font-family: 'Poppins', sans-serif;
+	position: relative;
+	background: #f1f2f7;
+	font-size: .835rem;
+	display: flex;
+
+	&.no-scroll {
+		overflow: hidden;
+	}
+}
