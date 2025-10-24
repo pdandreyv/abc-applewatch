@@ -3,6 +3,14 @@
 // список цветов
 /*
  * v1.0.0
+ * example: /api/shop/colors?key=secret_key
+ * example_response:
+ * {
+ *   "success": 1,
+ *   "list": [
+ *     {"id":1,"name":"Red","code":"#FF0000"}
+ *   ]
+ * }
  */
 
 include_once __DIR__.'/../_guard.php';

@@ -66,7 +66,7 @@ else {
     $base = ROOT_DIR.'api/';
     $list = array();
 
-    // хелпер для извлечения первого комментария из файла
+    // хелпер: извлекает первый комментарий из файла
     $extract_description = function($file_path) {
         $src = @file_get_contents($file_path);
         if ($src===false) return '';
@@ -88,11 +88,21 @@ else {
         return '';
     };
 
-    // разбор методов и параметров
-    $extract_meta = function($file_path) {
+    // хелпер: скрыть файл, если первый комментарий — //not_visible
+    $is_not_visible = function($file_path) {
+        $src = @file_get_contents($file_path);
+        if ($src===false) return false;
+        $src = preg_replace('/^\s*<\?php\s*/', '', $src);
+        return (bool)preg_match('/^\s*\/\/\s*not_visible\b/m', $src);
+    };
+
+    // разбор методов и параметров + извлечение примеров и примера ответа из комментариев
+    $extract_meta = function($file_path) use ($config) {
         $src = @file_get_contents($file_path);
         $method = 'GET/POST';
         $params = array();
+        $examples = array();
+        $exampleResponse = '';
         if ($src!==false) {
             // метод
             $usesPost = (bool)preg_match('/\$_POST\[/i', $src) || (bool)preg_match('/form_smart\s*\(\s*\$fields\s*,\s*stripslashes_smart\s*\(\$_POST/i', $src);
@@ -113,9 +123,58 @@ else {
             if (preg_match_all('/\$_(?:GET|POST|REQUEST)\[[\'\"]([a-zA-Z0-9_]+)[\'\"]\]/', $src, $m3)) {
                 foreach ($m3[1] as $p) $params[] = $p;
             }
+            // примеры из комментариев: строки вида "// example: ..."
+            if (preg_match_all('/^\s*\/\/\s*example\s*:\s*(.+)$/mi', $src, $mEx1)) {
+                foreach ($mEx1[1] as $ex) { $examples[] = trim($ex); }
+            }
+            // пример ответа одной строкой
+            if (preg_match('/^\s*\/\/\s*example_response\s*:\s*(.+)$/mi', $src, $mExR1)) {
+                $exampleResponse = trim($mExR1[1]);
+            }
+            // а также внутри блочных комментариев
+            if (preg_match_all('/\/\*([\s\S]*?)\*\//', $src, $blocks)) {
+                foreach ($blocks[1] as $block) {
+                    if (preg_match_all('/^\s*\*?\s*example\s*:\s*(.+)$/mi', $block, $mEx2)) {
+                        foreach ($mEx2[1] as $ex) { $examples[] = trim($ex); }
+                    }
+                    // пример ответа (многострочный)
+                    if ($exampleResponse==='') {
+                        if (preg_match('/example_response\s*:(.+)$/is', $block, $mR)) {
+                            $resp = trim($mR[1]);
+                            // очистим лидирующие символы комментариев
+                            $lines = preg_split('/\r?\n/', $resp);
+                            $norm = array();
+                            foreach ($lines as $ln) {
+                                $ln = preg_replace('/^\s*\*\s?/', '', $ln);
+                                $norm[] = rtrim($ln);
+                            }
+                            $exampleResponse = trim(implode("\n", $norm));
+                        }
+                    }
+                }
+            }
         }
         $params = array_values(array_unique($params));
-        return array($method, $params);
+        $examples = array_values(array_unique($examples));
+        return array($method, $params, $examples, $exampleResponse);
+    };
+
+    // хелпер: примеры URL для показа в списке
+    $build_examples = function($urlPath, $method, $params, $commentExamples = array()) use ($config) {
+        $fullBase = rtrim($config['http_domain'], '/');
+        $out = array();
+        // Только примеры из комментариев; без автогенерации
+        foreach ((array)$commentExamples as $ex) {
+            if ($ex==='') continue;
+            if (preg_match('#^https?://#i', $ex)) {
+                $out[] = $ex;
+            } elseif ($ex[0]=='/') {
+                $out[] = $fullBase.$ex;
+            } else {
+                if ($ex[0]=='?') $out[] = $fullBase.$urlPath.$ex; else $out[] = $fullBase.$urlPath.'?'.$ex;
+            }
+        }
+        return $out;
     };
 
     // файлы верхнего уровня
@@ -123,17 +182,22 @@ else {
         if ($f=='.' || $f=='..') continue;
         $path = $base.$f;
         if (is_file($path) && substr($f,-4)=='.php' && $f!='index.php') {
+            if ($is_not_visible($path)) continue; // скрыть из списка
             $name = basename($f,'.php');
-            list($method,$params) = $extract_meta($path);
+            list($method,$params,$commentExamples,$exampleResponse) = $extract_meta($path);
+            $url = '/api/'.$name;
             $list[] = array(
-                'url' => '/api/'.$name,
+                'url' => $url,
                 'file'=> 'api/'.$f,
                 'description' => $extract_description($path),
                 'method' => $method,
-                'params' => $params
+                'params' => $params,
+                'examples' => $build_examples($url, $method, $params, $commentExamples),
+                'example_response' => $exampleResponse
             );
         }
     }
+
     // подкаталоги первого уровня
     foreach (scandir($base) as $d) {
         if ($d=='.' || $d=='..') continue;
@@ -141,28 +205,37 @@ else {
         if (is_dir($dir)) {
             // _index.php как /api/{dir}
             if (is_file($dir.'/_index.php')) {
-                list($method,$params) = $extract_meta($dir.'/_index.php');
-                $list[] = array(
-                    'url' => '/api/'.$d,
-                    'file'=> 'api/'.$d.'/_index.php',
-                    'description' => $extract_description($dir.'/_index.php'),
-                    'method' => $method,
-                    'params' => $params
-                );
+                if (!$is_not_visible($dir.'/_index.php')) {
+                    list($method,$params,$commentExamples,$exampleResponse) = $extract_meta($dir.'/_index.php');
+                    $url = '/api/'.$d;
+                    $list[] = array(
+                        'url' => $url,
+                        'file'=> 'api/'.$d.'/_index.php',
+                        'description' => $extract_description($dir.'/_index.php'),
+                        'method' => $method,
+                        'params' => $params,
+                        'examples' => $build_examples($url, $method, $params, $commentExamples),
+                        'example_response' => $exampleResponse
+                    );
+                }
             }
             // отдельные файлы
             foreach (scandir($dir) as $f2) {
                 if ($f2=='.' || $f2=='..' || $f2=='_index.php') continue;
                 $path2 = $dir.'/'.$f2;
                 if (is_file($path2) && substr($f2,-4)=='.php') {
+                    if ($is_not_visible($path2)) continue; // скрыть из списка
                     $name2 = basename($f2,'.php');
-                    list($method,$params) = $extract_meta($path2);
+                    list($method,$params,$commentExamples,$exampleResponse) = $extract_meta($path2);
+                    $url2 = '/api/'.$d.'/'.$name2;
                     $list[] = array(
-                        'url' => '/api/'.$d.'/'.$name2,
+                        'url' => $url2,
                         'file'=> 'api/'.$d.'/'.$f2,
                         'description' => $extract_description($path2),
                         'method' => $method,
-                        'params' => $params
+                        'params' => $params,
+                        'examples' => $build_examples($url2, $method, $params, $commentExamples),
+                        'example_response' => $exampleResponse
                     );
                 }
             }

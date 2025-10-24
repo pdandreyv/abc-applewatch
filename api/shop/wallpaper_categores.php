@@ -3,6 +3,14 @@
 // список категорий обоев
 /*
  * v1.0.0
+ * example: /api/shop/wallpaper_categores?key=secret_key - список категорий обоев
+ * example_response:
+ * {
+ *   "success": 1,
+ *   "list": [
+ *     {"id":1,"name":"Nature","img":"http://example.com/img.png"}
+ *   ]
+ * }
  */
 
 include_once __DIR__.'/../_guard.php';

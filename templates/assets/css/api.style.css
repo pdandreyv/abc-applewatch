@@ -9,10 +9,16 @@ html,body{margin:0;padding:0;background:#f3f6fa;color:#1f2937;font:16px/1.5 -app
 .api-list{display:flex;flex-direction:column;gap:8px}
 
 /* строка */
-.api-row{display:flex;align-items:center;gap:12px;text-decoration:none;border-radius:6px;overflow:hidden;border:1px solid #e5e7eb}
+.api-row{display:flex;align-items:flex-start;gap:12px;text-decoration:none;border-radius:6px;overflow:hidden;border:1px solid #e5e7eb;flex-wrap:wrap}
 .api-row .api-badge{min-width:110px;text-align:center;font-weight:700;color:#111;padding:8px 10px}
 .api-row .api-path{flex:1;padding:10px 12px;background:#ffffff;color:#1e293b}
-.api-row .api-right{flex:1;padding:10px 12px;color:#334155;display:flex;gap:12px;justify-content:flex-end}
+.api-row .api-right{flex:2;padding:10px 12px;color:#334155;display:flex;gap:12px;justify-content:flex-start}
+.api-row .api-examples{flex-basis:100%;padding:0px 12px 0px 132px;font-size:12px;opacity:.9}
+.api-row pre.api-response{
+    margin:0;
+    padding:8px 12px 12px 132px;
+    font-size:12px;
+}
 .api-row .api-desc{color:#1d4ed8}
 .api-row .api-params code{background:#111827;color:#fff;padding:2px 6px;border-radius:4px}
 

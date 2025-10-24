@@ -1,5 +1,6 @@
 <?php
 
+//not_visible
 // Загрузчик для HTML5 uploader в админке: возвращает plain temp-id
 /*
  * v1.0.0

@@ -93,7 +93,7 @@ if (@$config['https']==1) {
 }
 
 //включена заглушка для всех кроме администраторов или если ошибка с БД
-if (($config['dummy']==1 AND access('user admin')==false) OR @$config['mysql_error']) {
+if ($config['dummy']==1) {
 	echo html_render('layouts/_dummy');
 	die();
 }

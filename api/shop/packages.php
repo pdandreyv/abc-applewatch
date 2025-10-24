@@ -3,6 +3,14 @@
 // список пакетов
 /*
  * v1.0.0
+ * example: /api/shop/packages?key=secret_key
+ * example_response:
+ * {
+ *   "success": 1,
+ *   "list": [
+ *     {"id":1,"count":5,"price":3.99}
+ *   ]
+ * }
  */
 
 include_once __DIR__.'/../_guard.php';

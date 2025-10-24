@@ -3,6 +3,15 @@
 // список обоев в категории
 /*
  * v1.0.0
+ * example: /api/shop/wallpapers?key=secret_key&category={id} - только видимые
+ * example: /api/shop/wallpapers?key=secret_key&category={id}&all=1 - все обои
+ * example_response:
+ * {
+ *   "success": 1,
+ *   "list": [
+ *     {"id":10,"name":"Galaxy","img":"http://example.com/img.png","paid":0,"price":0}
+ *   ]
+ * }
  */
 
 include_once __DIR__.'/../_guard.php';

@@ -3,6 +3,14 @@
 // Список доступных языков для обоев
 /*
  * v1.0.0
+ * example: /api/wallpaper/languages?key=secret_key
+ * example_response:
+ * {
+ *   "success": 1,
+ *   "list": [
+ *     {"id":1,"name":"English","localization":"en"}
+ *   ]
+ * }
  */
 
 include_once __DIR__.'/../_guard.php';

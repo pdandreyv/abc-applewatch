@@ -3,6 +3,13 @@
 // Получение словаря по id языка
 /*
  * v1.0.0
+ * example: /api/wallpaper/dictionary?key=secret_key&language_id={id}
+ * example_response:
+ * {
+ *   "success": 1,
+ *   "language_id": 1,
+ *   "dictionary": {"hello":"Привет"}
+ * }
  */
 
 include_once __DIR__.'/../_guard.php';

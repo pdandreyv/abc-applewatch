@@ -3,6 +3,12 @@
 // Получение/создание пользователя по apple_id
 /*
  * v1.0.0
+ * example: /api/user/apple?key=secret_key&apple_id={apple_id} - получить/создать пользователя
+ * example_response:
+ * {
+ *   "success": 1,
+ *   "user": {"id":1,"apple_id":"abc123"}
+ * }
  */
 
 include_once __DIR__.'/../_guard.php';

@@ -3,6 +3,15 @@
 // Создание записи генерации для пользователя
 /*
  * v1.0.0
+ * example: /api/user/generation_create?key=secret_key&apple_id={apple_id}&style_id={style_id}&color_id={color_id}&prompt={text}
+ * example_response:
+ * {
+ *   "success": 1,
+ *   "id": 123,
+ *   "message": "created",
+ *   "img_url": "http://example.com/files/user_generation/abc/123.png",
+ *   "final_prompt": "..."
+ * }
  */
 
 include_once __DIR__.'/../_guard.php';

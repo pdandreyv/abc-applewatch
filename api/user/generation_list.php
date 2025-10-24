@@ -3,6 +3,14 @@
 // Список изображений пользователя по стилю
 /*
  * v1.0.0
+ * example: /api/user/generation_list?key=secret_key&apple_id={apple_id}&style_id={style_id}
+ * example_response:
+ * {
+ *   "success": 1,
+ *   "list": [
+ *     {"id":10, "img": "http://example.com/files/user_generation/abc/10.png"}
+ *   ]
+ * }
  */
 
 include_once __DIR__.'/../_guard.php';

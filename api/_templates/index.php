@@ -1,4 +1,6 @@
 <?php
+
+//not_visible
 // ожидается переменная $api_list
 ?>
 <!doctype html>
@@ -37,6 +39,16 @@
 							</span>
 						<?php endif; ?>
 					</span>
+					<?php if (!empty($e['examples'])): ?>
+						<div class="api-examples">
+							<?php foreach ($e['examples'] as $ex): ?>
+								<div>пример: <code><?=htmlspecialchars($ex)?></code></div>
+							<?php endforeach; ?>
+						</div>
+					<?php endif; ?>
+					<?php if (!empty($e['example_response'])): ?>
+						<pre class="api-response">ответ: <code><?=htmlspecialchars($e['example_response'])?></code></pre>
+					<?php endif; ?>
 				</a>
 			<?php endforeach; ?>
 		</section>

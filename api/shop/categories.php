@@ -1,8 +1,18 @@
 <?php
 
+//not_visible
 // список категорий магазина
 /*
  * v1.0.0
+ * example: /api/shop/categories?key=secret_key - только видимые категории
+ * example: /api/shop/categories?key=secret_key&all=1 - все категории
+ * example_response:
+ * {
+ *   "success": 1,
+ *   "list": [
+ *     {"id":1,"name":"Abstract","level":1,"parent":0,"description":"","img":"http://example.com/img1.png","total":12,"avail":5}
+ *   ]
+ * }
  */
 
 // параметры

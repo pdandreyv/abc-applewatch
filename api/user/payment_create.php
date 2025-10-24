@@ -3,6 +3,7 @@
 // Создание записи оплаты пользователя
 /*
  * v1.0.0
+ * example: /api/user/payment_create?key=secret_key&user_id={user_id}&package_id={package_id}&price={amount}
  */
 
 include_once __DIR__.'/../_guard.php';

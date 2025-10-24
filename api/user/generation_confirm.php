@@ -3,6 +3,13 @@
 // Подтверждение генерации: выставляет display=1
 /*
  * v1.0.0
+ * example: /api/user/generation_confirm?key=secret_key&apple_id={apple_id}&generation_id={id}
+ * example_response:
+ * {
+ *   "success": 1,
+ *   "message": "confirmed",
+ *   "generation_id": 123
+ * }
  */
 
 include_once __DIR__.'/../_guard.php';

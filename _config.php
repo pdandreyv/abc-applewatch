@@ -8,5 +8,5 @@ $config['redirect_uppercase']='1';
 $config['https']='0';
 $config['domain_main']='';
 $config['domain_main_redirect']='0';
-$config['dummy']='0';
+$config['dummy']='1';
 $config['uploader']='1';

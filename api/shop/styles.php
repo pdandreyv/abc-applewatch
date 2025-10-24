@@ -3,6 +3,14 @@
 // список стилей
 /*
  * v1.0.0
+ * example: /api/shop/styles?key=secret_key
+ * example_response:
+ * {
+ *   "success": 1,
+ *   "list": [
+ *     {"id":1,"name":"Minimal"}
+ *   ]
+ * }
  */
 
 include_once __DIR__.'/../_guard.php';

@@ -1,5 +1,6 @@
 <?php
 
+//not_visible
 /**
  * файл генерирует xml документ для yandex market
  * доступен по адресу /api/market/
