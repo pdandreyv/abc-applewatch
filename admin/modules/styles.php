@@ -9,7 +9,6 @@ $table = array(
     'id'   => 'id name sort',
     'name' => '',
     'sort' => 'right',
-    'prompt' => ''
 );
 
 $query = "SELECT styles.* FROM styles WHERE 1";

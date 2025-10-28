@@ -10,7 +10,6 @@ $table = array(
     'name' => '',
     'code' => '',
     'sort' => 'right',
-    'prompt' => ''
 );
 
 $query = "SELECT colors.* FROM colors WHERE 1";
