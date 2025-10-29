@@ -60,14 +60,14 @@ $(document).ready(function(){
 		if (tr.find('a:hover').length>0) return;
 		tr.addClass('active').siblings('.active').removeClass('active');
 		menu.css({left:e.pageX, top:e.pageY}).data('caller',tr).fadeIn(100);
-		$('.boolean',menu).each(function(){
-			var m = $(this),
-				a = $('b',m),
-				name = m.data('name'),
-				key = m.data('key'),
-				c = $('td[data-name='+name+'] a.js_boolean',tr).hasClass(key+'_1');
-			a.toggleClass(key+'_0',!c).toggleClass(key+'_1',c);
-		});
+        $('.boolean',menu).each(function(){
+            var m = $(this),
+                a = $('b',m),
+                name = m.data('name'),
+                key = m.data('key'),
+                c = $('td[data-name='+name+'] input.js_toggle',tr).is(':checked');
+            a.toggleClass(key+'_0',!c).toggleClass(key+'_1',c);
+        });
 		return false;
 	});
 	//скрыть меню
@@ -82,14 +82,16 @@ $(document).ready(function(){
 	}).on('click','.tabs',function(){
 		menu.trigger('menu.hide').data('caller').find('a.open').click();
 	//boolean
-	}).on('click','.boolean',function(){
-		var m = $(this),
-			name = m.data('name'),
-			key = m.data('key');
-		menu.data('caller').find('td[data-name='+name+'] a.js_boolean').click();
-		$('b',m).toggleClass(key+'_0').toggleClass(key+'_1');
-		return false;
-	//удалить
+    }).on('click','.boolean',function(){
+        var m = $(this),
+            name = m.data('name'),
+            key = m.data('key'),
+            caller = menu.data('caller'),
+            cb = caller.find('td[data-name='+name+'] input.js_toggle');
+        cb.prop('checked', !cb.is(':checked')).trigger('change');
+        $('b',m).toggleClass(key+'_0').toggleClass(key+'_1');
+        return false;
+    //удалить
 	}).on('click','.delete',function(){
 		menu.trigger('menu.hide').data('caller').find('a.delete').click();
 		return false;
@@ -683,18 +685,15 @@ $(document).ready(function(){
 		}
 	}
 
-	//ПЕРЕКЛЮЧАТЕЛИ ============================================================
-	table.on('click','.js_boolean',function(){
-		var a = $(this),
-			m = table.data('module'),
-			id = a.closest('tr').data('id'),
-			name = a.closest('td').data('name'),
-			key = a.closest('td').data('key'),
-			value = a.hasClass(key+'_1') ? 0 : 1;
-		$.get('/admin.php', {'m':m,'u':'post','id':id,'name':name,'value':value});
-		a.toggleClass(key+'_0').toggleClass(key+'_1');
-		return false;
-	});
+    //ПЕРЕКЛЮЧАТЕЛИ ============================================================
+    table.on('change','.js_toggle',function(){
+        var i = $(this),
+            m = table.data('module'),
+            id = i.closest('tr').data('id'),
+            name = i.closest('td').data('name'),
+            value = i.is(':checked') ? 1 : 0;
+        $.get('/admin.php', {'m':m,'u':'post','id':id,'name':name,'value':value});
+    });
 
 	//ОКНО УДАЛЕНИЯ ============================================================
 	//нажатие на "кнопку"

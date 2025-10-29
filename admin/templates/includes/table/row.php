@@ -28,7 +28,7 @@ foreach ($q['table'] as $k=>$v) {
 		$v = str_replace($matches[0],$matches[1],$v);
 	}
 	//v1.2.130 - чекбоксы для админки
-	if ($k=='_check')		$content.= '<td><input type="checkbox" name="_check" value="'.$row['id'].'"/></td>';
+	if ($k=='_check')		$content.= '<td style="text-align:center"><input type="checkbox" name="_check" value="'.$row['id'].'"/></td>';
 	elseif ($k=='_edit')		$content.= '<td align="center"><a href="/admin.php?'.$url.'id='.$row['id'].'" class="sprite edit open"></a></td>';
 	elseif ($k=='_view') {
 		$content.= '<td><a class="sprite view" target="_blank" href="'.get_url($v,$row).'"></a></td>';
@@ -56,12 +56,14 @@ foreach ($q['table'] as $k=>$v) {
 		}
 	}
 	elseif ($v=='date')		$content.= '<td data-name="'.$k.'" class="post">'.$row[$k].'</td>';
-	elseif ($v=='boolean' OR $v=='display') {
-		$key = in_array($k,$config['boolean']) ? $k : 'boolean';
-		$content.= '<td align="center" data-name="'.$k.'" data-key="'.$key.'">';//key - клас спрайта для иконки
-		$content.= '<a class="sprite '.$key.'_'.($row[$k]==1 ? '1' : '0').' js_boolean" href="#" title="'.a18n($k).'"></a>';
-		$content.= '</td>';
-	}
+elseif ($v=='boolean' OR $v=='display') {
+	$content .= '<td data-name="'.$k.'">'
+		.'<div class="custom-control custom-switch custom-checkbox-warning" title="'.a18n($k).'">'
+			.'<input type="checkbox" class="js_toggle custom-control-input" id="'.$k.'-'.$row['id'].'" '.($row[$k]==1?'checked':'').'>'
+			.'<label class="custom-control-label" for="'.$k.'-'.$row['id'].'"></label>'
+		.'</div>'
+	.'</td>';
+}
 	elseif ($v=='right')	$content.= '<td data-name="'.$k.'" align="right" class="post">'.$row[$k].'</td>';
 	elseif ($v=='text')		$content.= '<td data-name="'.$k.'"><b>'.$row[$k].'</b></td>';
 	elseif ($v=='img')		{

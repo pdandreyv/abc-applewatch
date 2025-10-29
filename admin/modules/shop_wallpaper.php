@@ -14,14 +14,15 @@ $filter[] = array('search');
 $filter[] = array('category',$categories,'категории',true);
 
 // таблица списка
+
 $table = array(
-	'id'		=>	'id',
+	'id'		=>	'sort id',
 	'img'		=>	'img',
-	'price'		=>	'boolean',
 	'category'	=>	'<a href="/admin.php?m=shop_wallpaper_categores&id={category}">{sc_name}</a>',
 	'created_at'=>	'date',
 	'sort'		=>	'right',
-	'display'	=>	'boolean'
+	'price'		=>	'boolean',
+	'display'	=>	'boolean',
 );
 
 // условия поиска
@@ -53,13 +54,13 @@ $query = "
 
 // форма
 $form[] = array('select td4','category',array(
-	'value'=>array(true,$categories)
+    'value'=>array(true,$categories)
+));
+$form[] = array('input td2 right','sort');
+$form[] = array('file td6','img',array(
+    'sizes'=>array(''=>'resize 1000x1000')
 ));
 $form[] = array('checkbox','price');
-$form[] = array('input td2 right','sort');
 $form[] = array('checkbox','display');
-$form[] = array('file td6','img',array(
-	'sizes'=>array(''=>'resize 1000x1000')
-));
 
 

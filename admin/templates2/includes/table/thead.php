@@ -34,8 +34,8 @@ foreach ($q['table'] as $k=>$v) {
 		$content .= '<th width="20px"></th>';
 	}
 	elseif ($k == '_delete') $content .= '<th width="20px"></th>';
-	elseif ($k == 'display') $content .= '<th></th>';
-	elseif ($v == 'boolean') $content .= '<th></th>';
+	elseif ($k == 'display') $content .= '<th>'.a18n($k).'</th>';
+	elseif ($v == 'boolean') $content .= '<th>'.a18n($k).'</th>';
 	elseif ($v == 'img') $content .= '<th></th>';
 	else {
 		global $get;
