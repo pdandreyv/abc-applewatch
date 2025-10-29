@@ -10,6 +10,7 @@ $table = array(
     'count' => 'right',
     'price' => 'right',
     'sort'  => 'right',
+    'display' => 'boolean',
 );
 
 $query = "SELECT packages.* FROM packages WHERE 1";
@@ -17,5 +18,6 @@ $query = "SELECT packages.* FROM packages WHERE 1";
 $form[] = array('input td3 right','count');
 $form[] = array('input td3 right','price');
 $form[] = array('input td2 right','sort');
+$form[] = array('checkbox','display');
 
 
