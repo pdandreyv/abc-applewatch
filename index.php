@@ -94,6 +94,27 @@ if (@$config['https']==1) {
 
 //включена заглушка для всех кроме администраторов или если ошибка с БД
 if ($config['dummy']==1) {
+	// Разрешаем прямой доступ к статическим файлам из /files/ даже при заглушке
+	$reqPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+	if (substr($reqPath,0,7)==='/files/') {
+		$localPath = ROOT_DIR.ltrim($reqPath,'/');
+		if (is_file($localPath)) {
+			$ext = strtolower(pathinfo($localPath, PATHINFO_EXTENSION));
+			$mime = 'application/octet-stream';
+			if ($ext=='png') $mime = 'image/png';
+			elseif ($ext=='jpg' || $ext=='jpeg') $mime = 'image/jpeg';
+			elseif ($ext=='gif') $mime = 'image/gif';
+			elseif ($ext=='webp') $mime = 'image/webp';
+			elseif ($ext=='svg') $mime = 'image/svg+xml';
+			elseif ($ext=='pdf') $mime = 'application/pdf';
+			elseif ($ext=='css') $mime = 'text/css';
+			elseif ($ext=='js') $mime = 'application/javascript';
+			header('Content-Type: '.$mime);
+			header('Content-Length: '.filesize($localPath));
+			readfile($localPath);
+			die();
+		}
+	}
 	echo html_render('layouts/_dummy');
 	die();
 }
