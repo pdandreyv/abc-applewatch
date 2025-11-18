@@ -74,6 +74,9 @@ $parts = array();
 if ($style && trim($style['prompt'])!='') $parts[] = trim($style['prompt']);
 if ($color && trim($color['prompt'])!='') $parts[] = trim($color['prompt']);
 if ($prompt!=='') $parts[] = $prompt;
+// дополнительный промпт из админки
+$extraPrompt = isset($config['user_generation_prompt']) ? trim((string)$config['user_generation_prompt']) : '';
+if ($extraPrompt!=='') $parts[] = $extraPrompt;
 $finalPrompt = trim(implode('. ', $parts));
 if ($finalPrompt==='') $finalPrompt = 'Apple Watch wallpaper';
 
