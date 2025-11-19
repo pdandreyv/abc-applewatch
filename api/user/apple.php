@@ -7,7 +7,7 @@
  * example_response:
  * {
  *   "success": 1,
- *   "user": {"id":1,"apple_id":"abc123"}
+ *   "user": {"id":1,"apple_id":"abc123","count_generation":2}
  * }
  */
 
@@ -40,6 +40,11 @@ if (!$user) {
     $usr['id'] = mysql_fn('insert', 'users', $usr);
     $api['success'] = 1;
     $api['message'] = 'user was created';
+	$api['user'] = array(
+		'id'       => intval($usr['id']),
+		'apple_id' => $usr['apple_id'],
+		'count_generation' => intval($usr['count_generation']),
+	);
     return;
 }
 
@@ -47,6 +52,7 @@ $api['success'] = 1;
 $api['user'] = array(
     'id'       => intval($user['id']),
     'apple_id' => $user['apple_id'],
+	'count_generation' => intval($user['count_generation']),
 );
 
 

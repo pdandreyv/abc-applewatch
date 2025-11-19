@@ -89,6 +89,7 @@ $modules_admin = array(
 			//array('module'=>'shop_categories'),
 			array('module'=>'shop_wallpaper'),
             array('module'=>'shop_wallpaper_categores'),
+			array('module'=>'shop_wallpaper_bulk','name'=>'Массовая загрузка обоев'),
 			array('module'=>'styles',),
 			array('module'=>'colors',),
 			array('module'=>'user_generation',),

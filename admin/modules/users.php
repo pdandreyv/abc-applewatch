@@ -50,6 +50,7 @@ $table = array(
     'email'		=>	'::table_login',
     'phone'		=>  '::table_login',
     'apple_id'	=>  '',
+	'count_generation' => 'right',
     'type'		=>	$user_types,
     'last_visit'	=> 'date_smart',
     'created_at'		=>	'date_smart',
@@ -113,6 +114,7 @@ $form[] = array('select td3','type',array(
 	'value'=>array(true,$user_types,'')
 ));
 $form[] = array('input td3','apple_id');
+$form[] = array('input td3','count_generation',array('name'=>'доступных генераций'));
 //$form[] = array('input td3','date',array('name'=>'дата регистрации'));
 //$form[] = array('input td3','last_visit');
 //$form[] = array('checkbox td3','remember_me');

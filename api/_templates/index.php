@@ -26,30 +26,30 @@
 				elseif ($method==='PUT') $methodClass='method-put';
 				elseif ($method==='DELETE') $methodClass='method-delete';
 			?>
-				<a class="api-row <?=$methodClass?>" href="<?=htmlspecialchars($e['url'])?>">
-					<span class="api-badge"><?=htmlspecialchars($method)?></span>
-					<code class="api-path"><?=htmlspecialchars($e['url'])?></code>
-					<span class="api-right">
-						<span class="api-desc"><?=htmlspecialchars($e['description'])?></span>
-						<?php if (!empty($e['params'])): ?>
-							<span class="api-params">
-								<?php foreach ($e['params'] as $i => $p): ?>
-									<?= $i>0 ? ', ' : '' ?><code><?=htmlspecialchars($p)?></code>
-								<?php endforeach; ?>
-							</span>
-						<?php endif; ?>
-					</span>
-					<?php if (!empty($e['examples'])): ?>
-						<div class="api-examples">
-							<?php foreach ($e['examples'] as $ex): ?>
-								<div>пример: <code><?=htmlspecialchars($ex)?></code></div>
+			<div class="api-row">
+				<span class="api-badge"><?=htmlspecialchars($method)?></span>
+				<code class="api-path"><?=htmlspecialchars($e['url'])?></code>
+				<span class="api-right">
+					<span class="api-desc"><?=htmlspecialchars($e['description'])?></span>
+					<?php if (!empty($e['params'])): ?>
+						<span class="api-params">
+							<?php foreach ($e['params'] as $i => $p): ?>
+								<?= $i>0 ? ', ' : '' ?><code><?=htmlspecialchars($p)?></code>
 							<?php endforeach; ?>
-						</div>
+						</span>
 					<?php endif; ?>
-					<?php if (!empty($e['example_response'])): ?>
-						<pre class="api-response">ответ: <code><?=htmlspecialchars($e['example_response'])?></code></pre>
-					<?php endif; ?>
-				</a>
+				</span>
+				<?php if (!empty($e['examples'])): ?>
+					<div class="api-examples">
+						<?php foreach ($e['examples'] as $ex): ?>
+							<div>пример: <code><a class="<?=$methodClass?>" href="<?=htmlspecialchars($ex)?>"><?=htmlspecialchars($ex)?></a></code></div>
+						<?php endforeach; ?>
+					</div>
+				<?php endif; ?>
+				<?php if (!empty($e['example_response'])): ?>
+					<pre class="api-response">ответ: <code><?=htmlspecialchars($e['example_response'])?></code></pre>
+				<?php endif; ?>
+			</div>
 			<?php endforeach; ?>
 		</section>
 	</div>
