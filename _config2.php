@@ -2,7 +2,7 @@
 
 $config['cms_version'] = '1.4.93';
 
-$config['multilingual'] = false; //многоязычный сайт вкл/выкл
+$config['multilingual'] = true; //многоязычный сайт вкл/выкл
 $config['multilingual_u0'] = false;//использовать или нет для основного языка в урл u[0]
 
 $config['http'] = @$config['https']==1 ? 'https':'http';

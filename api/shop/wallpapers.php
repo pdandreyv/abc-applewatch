@@ -3,8 +3,8 @@
 // список обоев в категории
 /*
  * v1.0.0
- * example: /api/shop/wallpapers?key=secret_key&category={id} - только видимые
- * example: /api/shop/wallpapers?key=secret_key&category={id}&all=1 - все обои
+ * example: /api/shop/wallpapers?key=secret_key&category={id}
+ * example: /api/shop/wallpapers?key=secret_key&category={id}&all=1
  * example_response:
  * {
  *   "success": 1,

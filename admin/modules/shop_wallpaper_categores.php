@@ -15,12 +15,16 @@ $table = array(
 
 $query = "SELECT shop_wallpaper_categores.* FROM shop_wallpaper_categores WHERE 1";
 
-$form[] = array('input td6','name');
-$form[] = array('input td2 right','sort');
-$form[] = array('file td6','img',array(
+$tabs = array(
+	1=>'Общее',
+);
+
+$form[1][] = array('input td6','name');
+$form[1][] = array('input td2 right','sort');
+$form[1][] = array('file td6','img',array(
     'sizes'=>array(''=>'resize 1000x1000')
 ));
-$form[] = array('checkbox','display');
+$form[1][] = array('checkbox','display');
 
 
 

@@ -3,7 +3,7 @@
 // список категорий обоев
 /*
  * v1.0.0
- * example: /api/shop/wallpaper_categores?key=secret_key - список категорий обоев
+ * example: /api/shop/wallpaper_categores?key=secret_key
  * example_response:
  * {
  *   "success": 1,

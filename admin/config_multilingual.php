@@ -27,6 +27,18 @@ $config['lang_fields'] = array(
 		array('input td12','title',array('name' => a18n('title'))),
 		array('input td12','description', array('name' => a18n('description'))),
 	),
+	// категории обоев
+	'shop_wallpaper_categores'=>array(
+		array('input td12', 'name', array('name' => a18n('name'))),
+	),
+	// стили генерации (название)
+	'styles'=>array(
+		array('input td12', 'name', array('name' => a18n('name'))),
+	),
+	// цвета (название)
+	'colors'=>array(
+		array('input td12', 'name', array('name' => a18n('name'))),
+	),
 	//параметры пользователя
 	'user_fields'=>array(
 		array('input td6', 'name', array('name' => a18n('name'))),
@@ -61,6 +73,18 @@ $config['lang_tables'] = array(
 		'url'=>'VARCHAR( 255 ) NOT NULL',
 		'title'=>'VARCHAR( 255 ) NOT NULL',
 		'description'=>'VARCHAR( 255 ) NOT NULL'
+	),
+	// категории обоев (название)
+	'shop_wallpaper_categores'=>array(
+		'name'=>'VARCHAR( 255 ) NOT NULL'
+	),
+	// стили генерации (название и текст подсказки prompt)
+	'styles'=>array(
+		'name'=>'VARCHAR( 255 ) NOT NULL',
+	),
+	// цвета (название и текст подсказки prompt)
+	'colors'=>array(
+		'name'=>'VARCHAR( 255 ) NOT NULL',
 	),
 	//параметры пользователя
 	'user_fields'=>array(

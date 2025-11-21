@@ -14,9 +14,13 @@ $table = array(
 
 $query = "SELECT styles.* FROM styles WHERE 1";
 
-$form[] = array('input td6','name');
-$form[] = array('input td2 right','sort');
-$form[] = array('textarea td12','prompt');
-$form[] = array('checkbox','display');
+$tabs = array(
+	1=>'Общее',
+);
+
+$form[1][] = array('input td6','name');
+$form[1][] = array('input td2 right','sort');
+$form[1][] = array('textarea td12','prompt');
+$form[1][] = array('checkbox','display');
 
 

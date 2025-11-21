@@ -63,12 +63,12 @@ $modules_admin = array(
 			//'стоимости работ' =>'landing_items3'
 		)
 	),*/
-	/*array(
+	array(
 		'module'=>'languages',
 		'name'=>'dictionary',
 		'image'=>'dictionary',
 		'icon'=>'book-open',
-	),*/
+	),
     array(
         'module'=>'wallpaper_languages',
         'name'=>'wallpaper_languages',

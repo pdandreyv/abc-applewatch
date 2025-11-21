@@ -48,6 +48,13 @@ $form[1][] = array('textarea td12','user_generation_prompt', array(
 	'help' => 'Этот текст будет добавляться к пользовательскому prompt перед отправкой в ИИ'
 ));
 
+$form[1][] = '<h2>Apple StoreKit</h2>';
+$form[1][] = array('input td4','apple_issuer_id',array('name'=>'Issuer ID (App Store Connect)'));
+$form[1][] = array('input td4','apple_key_id',array('name'=>'Key ID (App Store Connect)'));
+$form[1][] = array('input td4','apple_bundle_id',array('name'=>'Bundle ID (например com.watchwalls.pro)'));
+$form[1][] = array('textarea td12','apple_private_key',array('name'=>'.p8 Private Key (PEM)'));
+$form[1][] = array('checkbox td12','apple_sandbox',array('name'=>'Использовать Sandbox (тестовые покупки)'));
+
 $form[1][] = '<h2>Оптимизация</h2>';
 //$form[1][] = array('checkbox td12 line','cache',true,array('name'=>'включить кеширование сайта'));
 $form[1][] = array('checkbox td12 line','html_minify',array('name'=>'включить сжатие html'));
