@@ -29,7 +29,11 @@ $lang = @$_REQUEST['language'] ? lang($_REQUEST['language']) : false;
 
 $api = array();
 
-$debug = @$_REQUEST['_debug'];
+$debug = (@$_REQUEST['_debug'] ?? null) ? 1 : 0;
+// поддержка параметра debug=1 для удобного чтения ответа
+if (!$debug && isset($_REQUEST['debug']) && $_REQUEST['debug']) {
+	$debug = 1;
+}
 
 if (@$u[2]) {
 	//второй уровень вложенности

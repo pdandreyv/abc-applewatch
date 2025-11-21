@@ -43,7 +43,10 @@ if ($rows) {
     foreach ($rows as $r) {
         $img = '';
         if (!empty($r['img'])) {
-            $img = $config['http_domain'] . get_img('shop_wallpaper', $r, 'img');
+            $path = get_img('shop_wallpaper', $r, 'img');
+            if ($path) {
+                $img = $config['http_domain'] . '/_imgs/502x502' . $path;
+            }
         }
         $price = (float)$r['price'];
         $api['list'][] = array(
