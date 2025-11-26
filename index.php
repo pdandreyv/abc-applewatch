@@ -94,8 +94,16 @@ if (@$config['https']==1) {
 
 //включена заглушка для всех кроме администраторов или если ошибка с БД
 if ($config['dummy']==1) {
-	// Разрешаем прямой доступ к статическим файлам из /files/ даже при заглушке
+	// Специальные исключения при заглушке
 	$reqPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+	// 1) Webhook от Apple: /storekit/notifications → пробрасываем в API
+	if ($reqPath==='/storekit/notifications') {
+		require_once(ROOT_DIR.'api/storekit/notifications.php');
+		header('Content-type: application/json; charset=UTF-8');
+		echo json_encode($api);
+		die();
+	}
+	// 2) Разрешаем прямой доступ к статическим файлам из /files/
 	if (substr($reqPath,0,7)==='/files/') {
 		$localPath = ROOT_DIR.ltrim($reqPath,'/');
 		if (is_file($localPath)) {
