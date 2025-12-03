@@ -69,12 +69,12 @@ $modules_admin = array(
 		'image'=>'dictionary',
 		'icon'=>'book-open',
 	),
-    array(
+    /*array(
         'module'=>'wallpaper_languages',
         'name'=>'wallpaper_languages',
         'image'=>'dictionary',
         'icon'=>'book-open',
-    ),
+    ),*/
 	/*array(
 		'module'=>'feedback',
 		'image'=>'feedback',

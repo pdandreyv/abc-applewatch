@@ -71,12 +71,15 @@ $style = mysql_select("SELECT id, name, prompt FROM styles WHERE id='".intval($s
 $color = $colorId ? mysql_select("SELECT id, name, code, prompt FROM colors WHERE id='".intval($colorId)."'", 'row') : null;
 
 $parts = array();
-if ($prompt!=='') $parts[] = $prompt;
-if ($style && trim($style['prompt'])!='') $parts[] = trim($style['prompt']);
-if ($color && trim($color['prompt'])!='') $parts[] = trim($color['prompt']);
+
 // дополнительный промпт из админки
 $extraPrompt = isset($config['user_generation_prompt']) ? trim((string)$config['user_generation_prompt']) : '';
 if ($extraPrompt!=='') $parts[] = $extraPrompt;
+
+if ($prompt!=='') $parts[] = $prompt;
+if ($style && trim($style['prompt'])!='') $parts[] = trim($style['prompt']);
+if ($color && trim($color['prompt'])!='') $parts[] = trim($color['prompt']);
+
 $finalPrompt = trim(implode('. ', $parts));
 
 log_add('generation_create.log', [
