@@ -146,14 +146,15 @@ $delete = array('pages'=>'language');
 //вкладки
 $tabs = array(
 	0 => 'Общее',
-	1 => 'Формы',
+	/*1 => 'Формы',
 	2 => 'Профайл',
 	3 => 'Каталог',
 	4 => 'Корзина',
 	5 => 'Яндекс-маркет',
 	6 => 'Рассылка',
 	7 => 'Календарь',
-	8 => 'Карта'
+	8 => 'Карта',*/
+	9 => 'Обои'
 );
 
 $form[0][] = lang_form('input td12','common|site_name','название сайта');
@@ -176,7 +177,7 @@ $form[0][] = lang_form('input td4','common|make_selection','сделайте в�
 $form[0][] = lang_form('input td4','common|pagination_prev','&#171;');
 $form[0][] = lang_form('input td4','common|pagination_next','&#187;');
 $form[0][] = lang_form('input td4','common|pagination_count_all','все');
-
+/*
 $form[1][] = '<h2>Форма обратной связи</h2>';
 $form[1][] = lang_form('input td12','feedback|name','имя');
 $form[1][] = lang_form('input td12','feedback|email','еmail');
@@ -383,7 +384,7 @@ $form[8][] = array('yandex_map','dictionary[map]',array(
 	'value'=>@$lang['map'],
 ));
 html_sources('footer','yandex_map');
-/* */
+/* 
 $form[8][] = array('google_map','dictionary[map]',array(
 	'value'=>@$lang['map'],
 	//api/common/google_autocomplete - с автозаполнением или без
@@ -392,6 +393,82 @@ $form[8][] = array('google_map','dictionary[map]',array(
 html_sources('footer','google_map');
 /* */
 
+
+// Обои — словарь приложения WatchWalls (секция wallpaper|key)
+$form[9][] = lang_form('input td12','wallpaper|generic_loading','Loading...');
+$form[9][] = lang_form('input td12','wallpaper|generic_processing','Processing...');
+$form[9][] = lang_form('input td12','wallpaper|generic_success','Success');
+$form[9][] = lang_form('input td12','wallpaper|generic_ok','OK');
+$form[9][] = lang_form('input td12','wallpaper|generic_cancel','Cancel');
+$form[9][] = lang_form('input td12','wallpaper|generic_buy','Buy');
+$form[9][] = lang_form('input td12','wallpaper|generic_unlock','Unlock');
+$form[9][] = lang_form('input td12','wallpaper|generic_premium','Premium');
+$form[9][] = lang_form('input td12','wallpaper|generic_pay','Pay');
+$form[9][] = lang_form('input td12','wallpaper|generic_no_products','No products available');
+$form[9][] = lang_form('input td12','wallpaper|generic_failed_to_load','Failed to load');
+$form[9][] = lang_form('input td12','wallpaper|watchface_mock_temperature','26°');
+$form[9][] = lang_form('input td12','wallpaper|home_faces_title','Faces \nLibrary');
+$form[9][] = lang_form('input td12','wallpaper|home_ai_title','AI Watch \nFaces');
+$form[9][] = lang_form('input td12','wallpaper|home_store_title','Store');
+$form[9][] = lang_form('input td12','wallpaper|home_store_subtitle','· Unlock All Faces\n· AI gens');
+$form[9][] = lang_form('input td12','wallpaper|home_credits_single','1 gen available');
+$form[9][] = lang_form('input td12','wallpaper|home_credits_multi','%d gens available');
+$form[9][] = lang_form('input td12','wallpaper|home_free_count','%d avail');
+$form[9][] = lang_form('input td12','wallpaper|home_total_count','%d total');
+$form[9][] = lang_form('input td12','wallpaper|generation_create_title','Create');
+$form[9][] = lang_form('input td12','wallpaper|generation_gens_available','Gens Available');
+$form[9][] = lang_form('input td12','wallpaper|generation_my_faces','My AI Faces');
+$form[9][] = lang_form('input td12','wallpaper|generation_nav_title','AI Watch Faces');
+$form[9][] = lang_form('input td12','wallpaper|generation_describe_title','Describe Face');
+$form[9][] = lang_form('input td12','wallpaper|generation_prompt_placeholder','Describe your watch face using dictation...');
+$form[9][] = lang_form('input td12','wallpaper|generation_generate_cta','Generate');
+$form[9][] = lang_form('input td12','wallpaper|generation_no_credits_title','No Credits');
+$form[9][] = lang_form('input td12','wallpaper|generation_no_credits_message','You need credits to generate wallpapers.');
+$form[9][] = lang_form('input td12','wallpaper|generation_buy_credits','Buy Credits');
+$form[9][] = lang_form('input td12','wallpaper|generation_network_error','Network error');
+$form[9][] = lang_form('input td12','wallpaper|store_nav_title','Store');
+$form[9][] = lang_form('input td12','wallpaper|store_buy_gens','Buy Gens');
+$form[9][] = lang_form('input td12','wallpaper|store_unlock_faces_title','Unlock\nFaces\nLibrary');
+$form[9][] = lang_form('input td12','wallpaper|store_min_price','From %@');
+$form[9][] = lang_form('input td12','wallpaper|store_unlock_price','%@ for all');
+$form[9][] = lang_form('input td12','wallpaper|store_unlock_price_fallback','$4.99 for all');
+$form[9][] = lang_form('input td12','wallpaper|buy_gens_success_title','Purchase Successful!');
+$form[9][] = lang_form('input td12','wallpaper|buy_gens_success_message','Credits added to your account');
+$form[9][] = lang_form('input td12','wallpaper|buy_gens_package_count','%d Gens');
+$form[9][] = lang_form('input td12','wallpaper|unlock_nav_title','Unlock Library');
+$form[9][] = lang_form('input td12','wallpaper|unlock_cta','Unlock');
+$form[9][] = lang_form('input td12','wallpaper|unlock_price_fallback_single','$3.99');
+$form[9][] = lang_form('input td12','wallpaper|faces_nav_title','Faces Library');
+$form[9][] = lang_form('input td12','wallpaper|settings_nav_title','Account');
+$form[9][] = lang_form('input td12','wallpaper|settings_user_placeholder','User');
+$form[9][] = lang_form('input td12','wallpaper|settings_language_fallback','English');
+$form[9][] = lang_form('input td12','wallpaper|settings_language_title','Language');
+$form[9][] = lang_form('input td12','wallpaper|settings_purchases_header','Purchases');
+$form[9][] = lang_form('input td12','wallpaper|settings_gens_available','Gens Available');
+$form[9][] = lang_form('input td12','wallpaper|settings_faces_library','Faces Library');
+$form[9][] = lang_form('input td12','wallpaper|settings_language_nav','Language');
+$form[9][] = lang_form('input td12','wallpaper|my_generations_nav_title','My Generations');
+$form[9][] = lang_form('input td12','wallpaper|my_generations_empty_title','No generations yet');
+$form[9][] = lang_form('input td12','wallpaper|my_generations_empty_subtitle','Create your first AI wallpaper');
+$form[9][] = lang_form('input td12','wallpaper|my_generations_failed_to_load','Failed to load');
+$form[9][] = lang_form('input td12','wallpaper|my_generations_delete_title','Delete?');
+$form[9][] = lang_form('input td12','wallpaper|download_instruction_message','Watch Face Saved to Photos\nSet it on your Apple Watch via iPhone');
+$form[9][] = lang_form('input td12','wallpaper|download_alert_title','Wallpaper Saved!');
+$form[9][] = lang_form('input td12','wallpaper|generic_deleted','Deleted');
+$form[9][] = lang_form('input td12','wallpaper|generic_downloaded','Downloaded');
+$form[9][] = lang_form('input td12','wallpaper|generic_delete','Delete');
+$form[9][] = lang_form('input td12','wallpaper|generation_result_nav_title','Result');
+$form[9][] = lang_form('input td12','wallpaper|wallpapers_empty_title','No wallpapers');
+$form[9][] = lang_form('input td12','wallpaper|wallpapers_premium_label','Premium');
+$form[9][] = lang_form('input td12','wallpaper|download_instruction_short','File saved in app. To set as watch face, open Watch app on iPhone.');
+$form[9][] = lang_form('input td12','wallpaper|paywall_title','Premium Wallpaper');
+$form[9][] = lang_form('input td12','wallpaper|paywall_description','Unlock this wallpaper');
+$form[9][] = lang_form('input td12','wallpaper|paywall_buy_single','Buy for %@');
+$form[9][] = lang_form('input td12','wallpaper|paywall_unlock_all','Unlock All Wallpapers');
+$form[9][] = lang_form('input td12','wallpaper|paywall_unlock_all_price','One-time $4.99');
+$form[9][] = lang_form('input td12','wallpaper|download_ready_title','Ready to Send');
+$form[9][] = lang_form('input td12','wallpaper|download_instruction_airdrop','Send file to iPhone via AirDrop or Messages to save it to Photos.');
+$form[9][] = lang_form('input td12','wallpaper|generic_share','Send to iPhone');
 
 function lang_form($type,$key,$name) {
 	global $lang;

@@ -15,11 +15,13 @@
 
 include_once __DIR__.'/../_guard.php';
 
-// получаем видимые языки
-$rows = mysql_select(
-	"SELECT id, name, localization\n\t FROM wallpaper_languages\n\t WHERE display = 1\n\t ORDER BY sort ASC, id ASC",
-	'rows'
-);
+// получаем видимые языки из основной таблицы languages
+$rows = mysql_select("
+	SELECT id, name, localization
+	FROM languages
+	WHERE display = 1
+	ORDER BY `rank` DESC, id ASC
+", 'rows');
 
 $api['success'] = 1;
 $api['list'] = array();

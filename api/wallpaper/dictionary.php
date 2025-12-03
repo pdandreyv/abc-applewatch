@@ -22,7 +22,7 @@ if ($languageId <= 0) {
 	return;
 }
 
-$row = mysql_select("SELECT id, dictionary FROM wallpaper_languages WHERE id='".intval($languageId)."' LIMIT 1", 'row');
+$row = mysql_select("SELECT id FROM languages WHERE id='".intval($languageId)."' LIMIT 1", 'row');
 if (!$row) {
 	$api['success'] = 0;
 	$api['error'] = 'not_found';
@@ -31,9 +31,14 @@ if (!$row) {
 }
 
 $dict = array();
-if (!empty($row['dictionary'])) {
-	$decoded = json_decode($row['dictionary'], true);
-	if (is_array($decoded)) $dict = $decoded;
+// загружаем файл словаря секции wallpaper из файловой системы (как в админ-модуле languages)
+$lang = array();
+$file = ROOT_DIR . 'files/languages/' . intval($row['id']) . '/dictionary/wallpaper.php';
+if (is_file($file)) {
+	include $file; // ожидается $lang['wallpaper'] = array(...)
+	if (isset($lang['wallpaper']) && is_array($lang['wallpaper'])) {
+		$dict = $lang['wallpaper'];
+	}
 }
 
 $api['success'] = 1;
