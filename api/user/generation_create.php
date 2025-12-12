@@ -18,23 +18,23 @@ include_once __DIR__.'/../_guard.php';
 
 // входные параметры
 $appleId = isset($_REQUEST['apple_id']) ? trim((string)$_REQUEST['apple_id']) : '';
-$styleId = isset($_REQUEST['style_id']) ? intval($_REQUEST['style_id']) : 0;
-$colorId = isset($_REQUEST['color_id']) ? intval($_REQUEST['color_id']) : 0;
+//$styleId = isset($_REQUEST['style_id']) ? intval($_REQUEST['style_id']) : 0;
+//$colorId = isset($_REQUEST['color_id']) ? intval($_REQUEST['color_id']) : 0;
 $prompt  = isset($_REQUEST['prompt']) ? trim((string)$_REQUEST['prompt']) : '';
 
 // логируем вход (без чувствительных данных)
 log_add('generation_create.log', [
     'stage' => 'input',
     'apple_id' => substr($appleId, 0, 6) . (strlen($appleId) > 6 ? '***' : ''),
-    'style_id' => $styleId,
-    'color_id' => $colorId,
+    //'style_id' => $styleId,
+    //'color_id' => $colorId,
     'prompt_len' => strlen($prompt),
 ]);
 
-if ($appleId === '' || $styleId<=0) {
+if ($appleId === '') {
     $api['success'] = 0;
     $api['error'] = 'validation_error';
-    $api['message'] = 'apple_id and style_id are required';
+    $api['message'] = 'apple_id are required';
     return;
 }
 
@@ -59,16 +59,16 @@ if (intval($user['count_generation']) <= 0) {
 global $config;
 $row = array(
     'user_id'   => intval($user['id']),
-    'style_id'  => $styleId,
-    'color_id'  => $colorId,
+    'style_id'  => 1,//$styleId,
+    'color_id'  => 1,//$colorId,
     'prompt'    => $prompt,
     'img'       => '',
     'created_at'=> $config['datetime'],
 );
 
 // соберём общий промпт: prompt + prompts из стиля и цвета
-$style = mysql_select("SELECT id, name, prompt FROM styles WHERE id='".intval($styleId)."'", 'row');
-$color = $colorId ? mysql_select("SELECT id, name, code, prompt FROM colors WHERE id='".intval($colorId)."'", 'row') : null;
+//$style = mysql_select("SELECT id, name, prompt FROM styles WHERE id='".intval($styleId)."'", 'row');
+//$color = $colorId ? mysql_select("SELECT id, name, code, prompt FROM colors WHERE id='".intval($colorId)."'", 'row') : null;
 
 $parts = array();
 
@@ -77,8 +77,8 @@ $extraPrompt = isset($config['user_generation_prompt']) ? trim((string)$config['
 if ($extraPrompt!=='') $parts[] = $extraPrompt;
 
 if ($prompt!=='') $parts[] = $prompt;
-if ($style && trim($style['prompt'])!='') $parts[] = trim($style['prompt']);
-if ($color && trim($color['prompt'])!='') $parts[] = trim($color['prompt']);
+//if ($style && trim($style['prompt'])!='') $parts[] = trim($style['prompt']);
+//if ($color && trim($color['prompt'])!='') $parts[] = trim($color['prompt']);
 
 $finalPrompt = trim(implode('. ', $parts));
 

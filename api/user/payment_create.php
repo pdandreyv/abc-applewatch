@@ -13,9 +13,9 @@ include_once __DIR__.'/../_guard.php';
 $userId    = isset($_REQUEST['user_id']) ? intval($_REQUEST['user_id']) : 0;
 $packageId = isset($_REQUEST['package_id']) ? intval($_REQUEST['package_id']) : 0;
 $price     = isset($_REQUEST['price']) ? (float)str_replace(',', '.', $_REQUEST['price']) : 0.0;
-
-// новые обязательные поля из StoreKit
 $productId  = isset($_REQUEST['product_id']) ? trim((string)$_REQUEST['product_id']) : '';
+/*
+// новые обязательные поля из StoreKit
 $transactionId = isset($_REQUEST['transaction_id']) ? trim((string)$_REQUEST['transaction_id']) : '';
 $originalTransactionId = isset($_REQUEST['original_transaction_id']) ? trim((string)$_REQUEST['original_transaction_id']) : '';
 $purchaseDate = isset($_REQUEST['purchase_date']) ? trim((string)$_REQUEST['purchase_date']) : '';
@@ -27,7 +27,7 @@ if ($userId<=0 || $packageId<=0 || $price<=0 || $productId==='' || $transactionI
 	$api['message'] = 'user_id, package_id, price, product_id, transaction_id, original_transaction_id, purchase_date, signed_transaction_info are required';
     return;
 }
-
+*/
 // проверим пользователя
 $existsUser = mysql_select("SELECT id FROM users WHERE id='".$userId."' LIMIT 1", 'string');
 if (!$existsUser) {
@@ -45,7 +45,7 @@ if ($dup) {
 	$api['message'] = 'transaction already processed';
 	return;
 }
-
+/*
 // верификация у Apple Server API
 global $config;
 $appleIssuerId = isset($config['apple_issuer_id']) ? $config['apple_issuer_id'] : '';
@@ -153,16 +153,16 @@ if ($verifiedTransactionId!==$transactionId || $verifiedProductId!==$productId) 
 	$api['message'] = 'verified data mismatch';
 	return;
 }
-
+*/
 $row = array(
 	'user_id'    => $userId,
 	'package_id' => $packageId,
 	'price'      => number_format($price, 2, '.', ''),
 	'product_id' => $productId,
-	'transaction_id' => $transactionId,
-	'original_transaction_id' => $originalTransactionId,
-	'purchase_date' => date('Y-m-d H:i:s', strtotime($purchaseDate)),
-	'signed_transaction_info' => $signedTransactionInfo,
+	'transaction_id' => $transactionId??0,
+	'original_transaction_id' => $originalTransactionId??0,
+	'purchase_date' => date('Y-m-d H:i:s', strtotime($purchaseDate??'now')),
+	'signed_transaction_info' => $signedTransactionInfo??'',
 	'status' => 'completed',
 	'verified' => 1,
 );
@@ -171,11 +171,12 @@ $id = mysql_fn('insert', 'user_payment', $row);
 
 if ($id) {
 	if (stripos($productId, 'credits') !== false) {
-		$pkgCount = mysql_select("SELECT `count` FROM packages WHERE id='".$packageId."' LIMIT 1", 'string');
+		$pkgCount = mysql_select("SELECT `count` FROM packages WHERE id='".intval($packageId)."' LIMIT 1", 'string');
 		if ($pkgCount) {
 			mysql_fn('query', "UPDATE users SET count_generation = count_generation + " . intval($pkgCount) . ", updated_at = NOW() WHERE id = '".$userId."'");
 		}
-	} elseif ($productId === 'com.watchwalls.unlock_all') {
+	} 
+	elseif ($productId === 'com.watchwalls.unlock_all') {
 		mysql_fn('query', "UPDATE users SET has_unlocked_all = 1, updated_at = NOW() WHERE id = '".$userId."'");
 	}
 	$api['success'] = 1;

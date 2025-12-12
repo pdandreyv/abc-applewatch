@@ -7,7 +7,7 @@
  * example_response:
  * {
  *   "success": 1,
- *   "user": {"id":1,"apple_id":"abc123","count_generation":2}
+ *   "user": {"id":1,"apple_id":"abc123","count_generation":2, "has_unlocked_all": 0}
  * }
  */
 
@@ -53,6 +53,7 @@ $api['user'] = array(
     'id'       => intval($user['id']),
     'apple_id' => $user['apple_id'],
 	'count_generation' => intval($user['count_generation']),
+    'has_unlocked_all' => intval($user['has_unlocked_all']),
 );
 
 

@@ -6,7 +6,7 @@
  */
 
 $table = array(
-    'id'    => 'id count price sort',
+    'id'    => 'sort:desc id count price',
     'count' => 'right',
     'price' => 'right',
     'sort'  => 'right',

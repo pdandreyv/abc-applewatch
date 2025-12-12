@@ -26,6 +26,29 @@ require_once(ROOT_DIR.'functions/mysql_func.php');	//функции для ра�
 require_once(ROOT_DIR.'functions/string_func.php');	//функции для работы со строками
 require_once (ROOT_DIR.'functions/array_func.php'); //функции работы с массивами
 
+$reqPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+// Специальные ссылки на PDF в корне: /privacy и /watch_walls_ai → скачивание файла
+if ($reqPath==='/privacy' || $reqPath==='/privacy/') {
+	$file = ROOT_DIR.'privacy.pdf';
+	if (is_file($file)) {
+		header('Content-Type: application/pdf');
+		header('Content-Disposition: attachment; filename="'.basename($file).'"');
+		header('Content-Length: '.filesize($file));
+		readfile($file);
+		die();
+	}
+}
+if ($reqPath==='/watch_walls_ai' || $reqPath==='/watch_walls_ai/') {
+	$file = ROOT_DIR.'watch_walls_ai.pdf';
+	if (is_file($file)) {
+		header('Content-Type: application/pdf');
+		header('Content-Disposition: attachment; filename="'.basename($file).'"');
+		header('Content-Length: '.filesize($file));
+		readfile($file);
+		die();
+	}
+}
+
 $request_url = explode('?',$_SERVER['REQUEST_URI'],2); //dd($request_url);
 //создание массива $u
 $u = explode('/',$request_url[0]);
