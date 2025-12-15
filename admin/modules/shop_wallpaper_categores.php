@@ -21,10 +21,10 @@ $tabs = array(
 
 $form[1][] = array('input td6','name');
 $form[1][] = array('input td2 right','sort');
+$form[1][] = array('checkbox','display');
 $form[1][] = array('file td6','img',array(
     'sizes'=>array(''=>'resize 1000x1000')
 ));
-$form[1][] = array('checkbox','display');
 
 
 
