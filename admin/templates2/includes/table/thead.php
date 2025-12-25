@@ -34,8 +34,34 @@ foreach ($q['table'] as $k=>$v) {
 		$content .= '<th width="20px"></th>';
 	}
 	elseif ($k == '_delete') $content .= '<th width="20px"></th>';
-	elseif ($k == 'display') $content .= '<th>'.a18n($k).'</th>';
-	elseif ($v == 'boolean') $content .= '<th>'.a18n($k).'</th>';
+	elseif ($k == 'display' || $v == 'boolean') {
+		// делаем кликабельным заголовок, если поле доступно для сортировки
+		$label = a18n($k);
+		if (isset($q['sort_array']) && array_key_exists($k, $q['sort_array'])) {
+			if ($q['order'] == $k) {
+				if ($get['s']) $s = ($get['s'] == 'desc') ? 'asc' : 'desc';
+				else $s = $q['sort_array'][$k];
+				$a = $s == 'asc' ? ' desc' : ' asc';
+			}
+			else {
+				$s = $q['sort_array'][$k];
+				$a = ' none ' . $s;
+			}
+			$content.= '<th><a class="sort' . ($q['order'] == $k ? ' active' : '') . '" href="' . $url . 'o=' . $k . '&s=' . $s . '">' . $label;
+			if ($a==' asc') {
+				$content.= '<i data-feather="chevron-down"></i>';
+			}
+			elseif ($a==' desc') {
+				$content.= '<i data-feather="chevron-up"></i>';
+			}
+			else {
+				$content.= '<i data-feather="bar-chart-2"></i>';
+			}
+			$content.= '</a></th>';
+		} else {
+			$content .= '<th>'.$label.'</th>';
+		}
+	}
 	elseif ($v == 'img') $content .= '<th></th>';
 	else {
 		global $get;

@@ -16,7 +16,7 @@ $filter[] = array('category',$categories,'категории',true);
 // таблица списка
 
 $table = array(
-	'id'		=>	'sort:desc id',
+	'id'		=>	'sort:desc id price',
 	'img'		=>	'img',
 	'category'	=>	'<a href="/admin.php?m=shop_wallpaper_categores&id={category}">{sc_name}</a>',
 	'created_at'=>	'date',
