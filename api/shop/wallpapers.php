@@ -34,7 +34,7 @@ $only_visible = empty($post['all']);
 $where = " WHERE category=".intval($post['category']);
 if ($only_visible) $where .= " AND display=1";
 
-$rows = mysql_select("\n    SELECT id,name,img,price\n    FROM shop_wallpaper\n    $where\n    ORDER BY id DESC\n","rows");
+$rows = mysql_select("SELECT id,name,img,price FROM shop_wallpaper $where ORDER BY price ASC, id DESC","rows");
 
 $api['success'] = 1;
 $api['list'] = array();
