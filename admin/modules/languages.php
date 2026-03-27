@@ -475,6 +475,16 @@ $form[9][] = lang_form('input td12','wallpaper|paywall_unlock_all_price','One-ti
 $form[9][] = lang_form('input td12','wallpaper|download_ready_title','Ready to Send');
 $form[9][] = lang_form('input td12','wallpaper|download_instruction_airdrop','Send file to iPhone via AirDrop or Messages to save it to Photos.');
 $form[9][] = lang_form('input td12','wallpaper|generic_share','Send to iPhone');
+$form[9][] = lang_form('input td12','wallpaper|companion_app_title','WatchWalls AI');
+$form[9][] = lang_form('input td12','wallpaper|companion_app_description','Saves watch face photos from your Apple Watch');
+$form[9][] = lang_form('input td12','wallpaper|companion_app_subtitle','Companion for Apple Watch');
+$form[9][] = lang_form('input td12','wallpaper|companion_watch_status','Apple Watch');
+$form[9][] = lang_form('input td12','wallpaper|companion_watch_connected','Connected');
+$form[9][] = lang_form('input td12','wallpaper|companion_watch_not_found','Not found');
+$form[9][] = lang_form('input td12','wallpaper|companion_saved_photos','Saved to Photos');
+$form[9][] = lang_form('input td12','wallpaper|companion_is_saving','Saving...');
+$form[9][] = lang_form('input td12','wallpaper|companion_last_saved','Last saved');
+$form[9][] = lang_form('input td12','wallpaper|companion_instruction','Tap download on the watch — the photo will be saved to Photos on iPhone.');
 
 function lang_form($type,$key,$name) {
 	global $lang;
