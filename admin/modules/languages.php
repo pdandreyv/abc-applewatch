@@ -485,6 +485,8 @@ $form[9][] = lang_form('input td12','wallpaper|companion_saved_photos','Saved to
 $form[9][] = lang_form('input td12','wallpaper|companion_is_saving','Saving...');
 $form[9][] = lang_form('input td12','wallpaper|companion_last_saved','Last saved');
 $form[9][] = lang_form('input td12','wallpaper|companion_instruction','Tap download on the watch — the photo will be saved to Photos on iPhone.');
+$form[9][] = lang_form('input td12','wallpaper|download_success_title','Sent!');
+$form[9][] = lang_form('input td12','wallpaper|download_saved_to_photos','Photo has been sent. Open the app on iPhone to save it to Photos.');
 
 function lang_form($type,$key,$name) {
 	global $lang;
