@@ -98,7 +98,7 @@ $config['debug'] = false; //если поставить true то будут п�
 $config['api_key'] = 'secret_key';
 
 // Stability.ai API
-$config['stability_api_key'] = 'sk-xYCOCmU0tNmdrfdF4pQMxQ9F3pfERGawH4iZ3z0rNAHZSt8d';
+$config['stability_api_key'] = 'sk-KFcQtJhouGwlioFRnVZfQYcbGbi0GkstLSSqhVE4ONPR8bO0';
 $config['stability_engine'] = 'stable-diffusion-xl-1024-v1-0';
 
 //виды оплат (мерчанты) - по умолчанию закомментированы
